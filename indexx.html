@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MH Tech Hub BD — Premium Electronics</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merienda&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+  --primary: #2ec1ac;        /* restored demo teal (your original) */
+  --primary-hover: #279e8c;
+  --bg-dark: #121212;
+  --text-dark: #ffffff;
+
+    }
+/* Buttons, accents, icons */
+.custom-bg, .btn-custom {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+  border: none !important;
+}
+.custom-bg:hover, .btn-custom:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+/* Premium hero */
+.hero-section {
+  height: 85vh;                     /* slightly smaller than full screen for premium feel */
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  background:
+    linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url('images/hero-business.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero text */
+.hero-section .display-4 {
+  font-family: 'Merienda', cursive;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  letter-spacing: .6px;
+  margin-bottom: .5rem;
+}
+
+/* Subtext */
+.hero-section .lead {
+  color: rgba(255,255,255,0.92);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+/* Make sure cards and text adapt in dark mode too */
+.dark-mode .project-card { background: #171717 !important; color: #eaeaea !important; }
+.dark-mode .project-card p, .dark-mode .project-card a { color: #d6d6d6 !important; }
+
+/* Map link class (ensure visible both modes) */
+.project-card a.map-link { color: #212529; font-weight:600; text-decoration:none; }
+.dark-mode .project-card a.map-link { color: #eee; }
+
+
+
+
+
+    html,body{ height:100%; }
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#070307 0%, #0b0710 60%);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: linear-gradient(90deg, rgba(106,27,154,0.12), rgba(0,0,0,0.15));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .brand {
+      font-family: 'Merienda', cursive;
+      font-size: 1.35rem;
+      color: #fff;
+      letter-spacing: .6px;
+    }
+    .nav-link { color: rgba(255,255,255,0.85) !important; }
+    .nav-link:hover { color: var(--brand-purple) !important; }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 0 4rem;
+      background: linear-gradient(180deg, rgba(106,27,154,0.12), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .hero .eyebrow { color: var(--brand-purple); font-weight:600; letter-spacing: .8px; }
+    .hero h1 { font-family: 'Merienda', cursive; font-size: 2.25rem; margin-bottom:.25rem; color:#fff; }
+    .hero p.lead { color: #dcd6e6; opacity:.95; }
+
+    /* Feature badges */
+    .feature {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      padding: .8rem 1rem;
+      border-radius: .6rem;
+      color: #cfc9d8;
+      display:flex; gap:.75rem; align-items:center;
+    }
+    .feature i { color: var(--brand-purple); font-size:1.25rem; }
+
+    /* Product cards */
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: .75rem;
+      overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease;
+      height:100%;
+      display:flex; flex-direction:column;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+    .product-card .img-wrap { background: #0b0710; display:flex; align-items:center; justify-content:center; height:220px; }
+    .product-card img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+
+    .product-card .card-body { padding: 1rem; display:flex; flex-direction:column; gap:.6rem; flex:1; }
+    .product-card h6 { margin:0; font-weight:700; font-size:1rem; color:#fff; }
+    .price { font-weight:700; color: var(--brand-purple); font-size:1.05rem; }
+    .muted { color:var(--muted); font-size:.92rem; }
+
+    .btn-outline-glow {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #fff;
+      background: transparent;
+      transition: all .18s;
+    }
+    .btn-outline-glow:hover { background: rgba(106,27,154,0.12); border-color:var(--brand-purple); color:var(--brand-purple); }
+
+    /* Cart sidebar */
+    .cart-panel {
+      width: 380px;
+      max-width: 92%;
+      background: linear-gradient(180deg,#0e0811 0%, #140921 100%);
+      border-left: 1px solid rgba(255,255,255,0.03);
+      padding: 1rem;
+      height:100vh;
+      position: fixed;
+      right: 0;
+      top: 0;
+      transform: translateX(105%);
+      transition: transform .28s ease;
+      z-index: 1200;
+    }
+    .cart-panel.open { transform: translateX(0); }
+    .cart-row { display:flex; gap:.6rem; align-items:center; }
+    .cart-row img { width:64px; height:64px; object-fit:cover; border-radius:.5rem; }
+
+    /* Footer */
+    footer { padding:2.2rem 0; color:#bfb8c8; border-top:1px solid rgba(255,255,255,0.03); }
+
+    /* Utilities */
+    .text-teal { color: var(--brand-purple); }
+    .badge-soft { background: rgba(106,27,154,0.12); color: var(--brand-purple); border-radius: .6rem; padding:.35rem .6rem; font-weight:600; }
+
+    /* Responsive tweaks */
+    @media (max-width:768px){
+      .hero h1 { font-size:1.6rem; }
+      .hero { padding:3.5rem 0 2.5rem; }
+      .cart-panel { width: 100%; height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg py-2">
+    <div class="container">
+      <a class="brand me-3" href="#">MH Tech Hub BD</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <form class="d-none d-md-flex ms-4 me-3" role="search">
+          <input class="form-control form-control-sm bg-transparent border-0 text-white" placeholder="Search products..." aria-label="Search">
+        </form>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-glow me-2" id="openCartBtn" aria-label="Open cart">
+            <i class="bi bi-bag-fill"></i> <span class="badge bg-white text-dark ms-2" id="cartCount">0</span>
+          </button>
+          <a class="btn btn-sm btn-outline-glow" href="#" role="button">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 text-white">
+          <div class="eyebrow mb-2">MH TECH HUB BD • MADHUPUR</div>
+          <h1>Premium Tech, Trusted Service</h1>
+          <p class="lead">High-quality electronics, expert setup & after-sales support. Explore our curated collection of laptops, accessories, and smart devices.</p>
+
+          <div class="d-flex gap-2 mt-4 flex-wrap">
+            <a href="#products" class="btn btn-lg btn-primary" style="background:linear-gradient(90deg,var(--brand-purple),#3b0f6b);border:none;border-radius:999px;padding:10px 28px;">Shop Now</a>
+            <a href="#projects" class="btn btn-outline-glow">Our Projects</a>
+          </div>
+        </div>
+
+        <div class="col-lg-5 d-none d-lg-block">
+          <div class="row g-2">
+            <div class="col-12 mb-2">
+              <div class="feature">
+                <i class="bi bi-shield-check"></i>
+                <div>
+                  <div class="small text-white">Genuine Products</div>
+                  <div class="muted">Authorized brands & warranties</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature">
+                <i class="bi bi-gear"></i>
+                <div>
+                  <div class="small text-white">Setup & Support</div>
+                  <div class="muted">Installation & training</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature">
+                <i class="bi bi-truck"></i>
+                <div>
+                  <div class="small text-white">Fast Delivery</div>
+                  <div class="muted">Across Tangail region</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </header>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Featured Products</h3>
+        <div class="muted">Showing curated selection</div>
+      </div>
+
+      <div class="row g-4">
+        <!-- product card (repeat) -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="Laptop A">
+            </div>
+            <div class="card-body">
+              <div>
+                <h6>ProBook X14</h6>
+                <div class="muted">Intel i5 • 8GB • 256GB SSD</div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="price">৳ 45,500</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-glow me-2" onclick="quickView(1)">Quick View</button>
+                  <button class="btn btn-sm btn-primary" onclick="addToCart(1)">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- product 2 -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1512499617640-c2f99912a285?auto=format&fit=crop&w=800&q=80" alt="Phone A">
+            </div>
+            <div class="card-body">
+              <div>
+                <h6>Galaxy S Ultra</h6>
+                <div class="muted">128GB • 8GB RAM</div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="price">৳ 32,900</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-glow me-2" onclick="quickView(2)">Quick View</button>
+                  <button class="btn btn-sm btn-primary" onclick="addToCart(2)">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- product 3 -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1585386959984-a415522b3f3b?auto=format&fit=crop&w=800&q=80" alt="Headset">
+            </div>
+            <div class="card-body">
+              <div>
+                <h6>ProSound Headset</h6>
+                <div class="muted">Noise-canceling • Wireless</div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="price">৳ 4,200</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-glow me-2" onclick="quickView(3)">Quick View</button>
+                  <button class="btn btn-sm btn-primary" onclick="addToCart(3)">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- product 4 -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="product-card">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80" alt="Router">
+            </div>
+            <div class="card-body">
+              <div>
+                <h6>Smart Router AX</h6>
+                <div class="muted">WiFi 6 • Dual Band</div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="price">৳ 3,100</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-glow me-2" onclick="quickView(4)">Quick View</button>
+                  <button class="btn btn-sm btn-primary" onclick="addToCart(4)">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- add more product cards as needed -->
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </section>
+
+  <!-- Projects / portfolio -->
+  <section id="projects" class="py-5 border-top" style="border-color: rgba(255,255,255,0.03) !important;">
+    <div class="container">
+      <h3 class="mb-4">Projects & Installations</h3>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="product-card">
+            <div class="img-wrap" style="height:160px;">
+              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80" alt="">
+            </div>
+            <div class="card-body">
+              <h6>School Lab Setup</h6>
+              <div class="muted">Complete computer lab setup for a local school (40+ machines)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="product-card">
+            <div class="img-wrap" style="height:160px;">
+              <img src="https://images.unsplash.com/photo-1503424886302-7b20f7a5c667?auto=format&fit=crop&w=800&q=80" alt="">
+            </div>
+            <div class="card-body">
+              <h6>Office Networking</h6>
+              <div class="muted">LAN & Wi-Fi setup for corporate office</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="product-card">
+            <div class="img-wrap" style="height:160px;">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="">
+            </div>
+            <div class="card-body">
+              <h6>Retail POS Systems</h6>
+              <div class="muted">Point-of-sale deployments with billing & inventory</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / newsletter -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <h3>Get a quote or visit us</h3>
+          <p class="muted">MH Tech Hub BD — Madhupur, Tangail. For installations, purchases, or after-sales support contact us.</p>
+
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-telephone me-2 text-teal"></i> +880 1XXX-XXXXXX</li>
+            <li class="mb-2"><i class="bi bi-envelope me-2 text-teal"></i> info@mhtechnhubbd.com</li>
+            <li class="mb-2"><i class="bi bi-geo-alt me-2 text-teal"></i> Madhupur, Tangail, Bangladesh</li>
+          </ul>
+
+          <div class="mt-3">
+            <a href="#" class="btn btn-outline-glow me-2">Visit on Google Maps</a>
+            <a href="#" class="btn btn-primary">Request Quote</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card p-3" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
+            <h6>Newsletter</h6>
+            <p class="muted">Get updates on new stock, offers & local service days.</p>
+            <div class="input-group">
+              <input class="form-control bg-transparent text-white" placeholder="Email address" aria-label="Email">
+              <button class="btn btn-primary">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <div class="brand">MH Tech Hub BD</div>
+        <div class="muted">Madhupur, Tangail • Bangladesh</div>
+      </div>
+      <div>
+        <a href="#" class="me-3 text-white"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="me-3 text-white"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="me-3 text-white"><i class="bi bi-youtube"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div id="cartPanel" class="cart-panel" aria-hidden="true">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="mb-0">Your Cart</h5>
+      <button class="btn btn-sm btn-outline-glow" id="closeCartBtn"><i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <div id="cartItems" style="overflow:auto;max-height:65vh;padding-right:.5rem">
+      <div class="muted">Cart is empty.</div>
+    </div>
+
+    <div class="mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="muted">Subtotal</div>
+        <div id="cartTotal" class="fw-bold">৳ 0</div>
+      </div>
+      <button class="btn btn-primary w-100" id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content text-dark">
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img id="modalImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="col-md-6 p-4">
+              <h4 id="modalTitle"></h4>
+              <p id="modalDesc" class="muted"></p>
+              <div class="mb-3"><span id="modalPrice" class="price"></span></div>
+              <div class="d-flex gap-2">
+                <input id="modalQty" type="number" min="1" value="1" class="form-control" style="width:100px;">
+                <button class="btn btn-primary" id="modalAdd">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // --- Simple product dataset (client-only) ---
+    const PRODUCTS = {
+      1: {id:1, title:'ProBook X14', price:45500, desc:'Intel i5 · 8GB RAM · 256GB SSD', img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80'},
+      2: {id:2, title:'Galaxy S Ultra', price:32900, desc:'128GB · 8GB RAM', img:'https://images.unsplash.com/photo-1512499617640-c2f99912a285?auto=format&fit=crop&w=800&q=80'},
+      3: {id:3, title:'ProSound Headset', price:4200, desc:'Noise-canceling · Wireless', img:'https://images.unsplash.com/photo-1585386959984-a415522b3f3b?auto=format&fit=crop&w=800&q=80'},
+      4: {id:4, title:'Smart Router AX', price:3100, desc:'WiFi 6 · Dual Band', img:'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80'}
+    };
+
+    // --- CART logic (session-stored in localStorage for demo) ---
+    let CART = JSON.parse(localStorage.getItem('mh_cart') || '{}');
+
+    function saveCart(){ localStorage.setItem('mh_cart', JSON.stringify(CART)); renderCart(); updateCartCount(); }
+
+    function updateCartCount(){
+      const count = Object.values(CART).reduce((s,q)=> s+q, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    function renderCart(){
+      const wrap = document.getElementById('cartItems');
+      wrap.innerHTML = '';
+      const ids = Object.keys(CART);
+      if(ids.length === 0){
+        wrap.innerHTML = '<div class="muted">Cart is empty.</div>';
+        document.getElementById('cartTotal').textContent = '৳ 0';
+        return;
+      }
+      let total = 0;
+      ids.forEach(id=>{
+        const prod = PRODUCTS[id];
+        const qty = CART[id];
+        const subtotal = prod.price * qty;
+        total += subtotal;
+        const row = document.createElement('div');
+        row.className = 'd-flex align-items-center mb-3 cart-row';
+        row.innerHTML = `
+          <img src="${prod.img}" alt="">
+          <div class="flex-grow-1 ms-2">
+            <div class="fw-bold">${prod.title}</div>
+            <div class="muted">৳ ${prod.price.toLocaleString()} × ${qty} = ৳ ${subtotal.toLocaleString()}</div>
+            <div class="mt-1">
+              <button class="btn btn-sm btn-outline-glow me-1" onclick="changeQty(${id}, ${qty-1})">-</button>
+              <button class="btn btn-sm btn-outline-glow" onclick="changeQty(${id}, ${qty+1})">+</button>
+              <button class="btn btn-sm btn-danger ms-2" onclick="removeFromCart(${id})">Remove</button>
+            </div>
+          </div>`;
+        wrap.appendChild(row);
+      });
+      document.getElementById('cartTotal').textContent = '৳ ' + total.toLocaleString();
+    }
+
+    function addToCart(id, qty = 1){
+      id = String(id);
+      CART[id] = (CART[id] || 0) + qty;
+      saveCart();
+      openCart();
+    }
+
+    function changeQty(id, qty){
+      id = String(id);
+      if(qty <= 0) { removeFromCart(Number(id)); return; }
+      CART[id] = qty;
+      saveCart();
+    }
+
+    function removeFromCart(id){
+      id = String(id);
+      delete CART[id];
+      saveCart();
+    }
+
+    // quick view modal
+    function quickView(id){
+      const prod = PRODUCTS[id];
+      const modal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+      document.getElementById('modalImg').src = prod.img;
+      document.getElementById('modalTitle').textContent = prod.title;
+      document.getElementById('modalDesc').textContent = prod.desc;
+      document.getElementById('modalPrice').textContent = '৳ ' + prod.price.toLocaleString();
+      document.getElementById('modalQty').value = 1;
+      document.getElementById('modalAdd').onclick = ()=>{ addToCart(id, Number(document.getElementById('modalQty').value)); modal.hide(); };
+      modal.show();
+    }
+
+    // cart panel open/close
+    const cartPanel = document.getElementById('cartPanel');
+    document.getElementById('openCartBtn').addEventListener('click', openCart);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+    function openCart(){ cartPanel.classList.add('open'); cartPanel.setAttribute('aria-hidden','false'); renderCart(); }
+    function closeCart(){ cartPanel.classList.remove('open'); cartPanel.setAttribute('aria-hidden','true'); }
+
+    // checkout stub
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+      if(Object.keys(CART).length === 0){ alert('Cart is empty'); return; }
+      alert('Checkout demo: cart stored locally. Implement server-side checkout later.');
+    });
+
+    // init
+    updateCartCount();
+    renderCart();
+  </script>
+</body>
+</html>

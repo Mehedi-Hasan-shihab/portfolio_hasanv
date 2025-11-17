@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MH Tech Tube BD — Store</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merienda&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root{
+      --accent: #186f6d;
+      --accent-2: #2ec1ac;
+      --muted: #6c757d;
+      --card-bg: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: "Poppins",system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#f5f7fa;
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Header / Navbar */
+    .navbar-brand { font-family: 'Merienda', cursive; font-size:1.45rem; color:var(--accent) !important;}
+    .nav-link { color:#333 !important; }
+    .search-input {
+      max-width:520px;
+      width:100%;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(0deg, rgba(24,111,109,0.06), rgba(24,111,109,0.06)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      padding:72px 0;
+    }
+    .hero .lead { color:#0b3b3a; opacity:.9; font-size:1.05rem; }
+
+    /* Product card */
+    .product-card {
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff, #fbfdff);
+      transition: transform .25s, box-shadow .25s;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+    .product-card:hover{ transform: translateY(-6px); box-shadow: 0 14px 40px rgba(20,40,60,0.12); }
+    .product-card img{ width:100%; height:220px; object-fit:cover; display:block; }
+    .product-card .card-body { padding:1rem; display:flex; flex-direction:column; gap:.6rem; flex:1; }
+    .product-title { font-weight:600; font-size:1rem; color:#123; margin:0; }
+    .product-desc { color:var(--muted); font-size:.92rem; margin:0; }
+    .price { font-weight:700; color:var(--accent); font-size:1.05rem; }
+
+    /* badges & pills */
+    .badge-ghost { background: rgba(30,30,30,0.06); color:#222; padding:.35rem .6rem; border-radius:999px; font-size:.82rem; }
+
+    /* Offcanvas cart */
+    .offcanvas-body .cart-item { border-bottom:1px solid #eee; padding:12px 0; }
+    .cart-thumb { width:64px; height:64px; object-fit:cover; border-radius:8px; }
+
+    /* Footer */
+    footer { background:#fff; padding:28px 0; border-top:1px solid #eef2f6; }
+
+    /* Responsive fine-tunes */
+    @media (max-width:768px){
+      .hero { padding:48px 0; text-align:center;}
+      .navbar .search-input { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">MH Tech Tube BD</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <form class="d-flex me-3">
+          <input id="searchBox" class="form-control search-input" placeholder="Search products, courses, tools..." aria-label="Search">
+        </form>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary d-none d-lg-inline" id="filterBtn" title="Filters">
+            <i class="bi bi-funnel"></i>
+          </button>
+
+          <!-- Cart offcanvas toggle -->
+          <button class="btn btn-dark d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
+            <i class="bi bi-cart-fill me-2"></i>
+            <span id="cartCount" class="badge bg-light text-dark">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-5 fw-bold">Premium IT & Training Tools — <span style="color:var(--accent)">Haque IT Centre</span></h1>
+          <p class="lead">High-quality equipment, training kits, and software packages crafted for learners and professionals in Madhupur, Tangail.</p>
+          <div class="mt-4">
+            <a href="#products" class="btn btn-dark btn-lg me-2">Shop Products</a>
+            <a href="#projects" class="btn btn-outline-secondary btn-lg">View Projects</a>
+          </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block">
+          <div class="card p-3 shadow-sm" style="border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.9), #fff)">
+            <img src="https://images.unsplash.com/photo-1581093588401-7d20f1b7b0c2?auto=format&fit=crop&w=800&q=80" alt="" style="width:100%;border-radius:12px;object-fit:cover;height:260px;">
+            <div class="mt-3">
+              <h6 class="mb-1">Featured kit: Raspberry Pi Starter</h6>
+              <p class="mb-0 text-muted small">Everything you need to build IoT projects and learn Linux programming.</p>
+              <div class="mt-2 d-flex justify-content-between align-items-center">
+                <div class="price">৳ 4,500</div>
+                <button class="btn btn-sm btn-outline-dark" onclick="openProductModal(5)">Quick view</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4 mb-0">Products</h2>
+        <div class="d-flex gap-2 align-items-center">
+          <div class="badge-ghost">Free delivery over ৳5,000</div>
+          <div class="form-select w-auto" id="sortSelect" style="min-width:160px;">
+            <select id="sortBy" class="form-select form-select-sm">
+              <option value="default">Sort: Featured</option>
+              <option value="price-asc">Price low → high</option>
+              <option value="price-desc">Price high → low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="productGrid" class="row g-4">
+        <!-- JS will render product cards here -->
+      </div>
+
+      <div class="text-center mt-4">
+        <button id="loadMore" class="btn btn-outline-secondary">Load more</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (simple showcase) -->
+  <section id="projects" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="h4 mb-4">Selected Projects</h2>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+          <div class="card p-3 h-100">
+            <img src="https://images.unsplash.com/photo-1581094651667-6b0b9e3b6d0b?auto=format&fit=crop&w=800&q=80" style="height:150px;object-fit:cover;border-radius:8px;" alt="">
+            <h6 class="mt-3">Local Network Setup</h6>
+            <p class="small text-muted">Campus network, configuration & hands-on workshops.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card p-3 h-100">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" style="height:150px;object-fit:cover;border-radius:8px;" alt="">
+            <h6 class="mt-3">IoT Farming Demo</h6>
+            <p class="small text-muted">Automated soil sensors & dashboard for small farms.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card p-3 h-100">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" style="height:150px;object-fit:cover;border-radius:8px;" alt="">
+            <h6 class="mt-3">Website Dev for NGOs</h6>
+            <p class="small text-muted">CMS-driven sites, responsive & SEO-friendly.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card p-3 h-100">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80" style="height:150px;object-fit:cover;border-radius:8px;" alt="">
+            <h6 class="mt-3">Training Portal</h6>
+            <p class="small text-muted">LMS basics, course content & student tracking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFCANVAS CART -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas" aria-labelledby="cartCanvasLabel">
+    <div class="offcanvas-header">
+      <h5 id="cartCanvasLabel">Your Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cartItems"></div>
+
+      <div class="mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div><strong>Total</strong></div>
+          <div><strong id="cartTotal">৳0.00</strong></div>
+        </div>
+        <div class="mt-3 d-grid">
+          <button class="btn btn-dark" id="checkoutBtn">Proceed to Checkout</button>
+          <button class="btn btn-outline-secondary mt-2" id="clearCart">Clear Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h5 class="mb-1">MH Tech Tube BD</h5>
+          <p class="small text-muted mb-0">Madhupur, Tangail, Bangladesh • support@haqueit.com • +880 1234 567890</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a class="text-muted me-3" href="#"><i class="bi bi-facebook fs-4"></i></a>
+          <a class="text-muted me-3" href="#"><i class="bi bi-instagram fs-4"></i></a>
+          <a class="text-muted me-3" href="#"><i class="bi bi-youtube fs-4"></i></a>
+          <a class="text-muted" href="#"><i class="bi bi-linkedin fs-4"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img id="modalImage" src="" alt="" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="col-md-6 p-4">
+              <h4 id="modalTitle"></h4>
+              <p id="modalDesc" class="text-muted"></p>
+              <div class="mb-3">
+                <div class="price" id="modalPrice"></div>
+              </div>
+              <div class="d-flex gap-2 align-items-center mb-3">
+                <input id="modalQty" type="number" min="1" value="1" class="form-control w-25">
+                <button class="btn btn-dark" id="addModalCart">Add to Cart</button>
+              </div>
+              <div><small class="text-muted">SKU: <span id="modalSku"></span></small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /***********************
+     * Sample product data *
+     ***********************/
+    const PRODUCTS = [
+      { id:1, title:'Beginner Laptop Kit', price:26500, desc:'Intel N4020, 8GB RAM, 256GB SSD — ideal for students.', img:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80', sku:'KIT-LAP-01', category:'kits' },
+      { id:2, title:'Raspberry Pi 4 Kit', price:4500, desc:'Starter kit with case, SD, power, and basic sensors.', img:'https://images.unsplash.com/photo-1581093588401-7d20f1b7b0c2?auto=format&fit=crop&w=900&q=80', sku:'KIT-RPI-04', category:'kits' },
+      { id:3, title:'Professional Router (AC2600)', price:8900, desc:'Dual band router for small labs, fast throughput & QoS.', img:'https://images.unsplash.com/photo-1557180295-76eee20ae8aa?auto=format&fit=crop&w=900&q=80', sku:'NET-AC2600', category:'network' },
+      { id:4, title:'WiFi Extender', price:2200, desc:'Extend coverage in classrooms and labs.', img:'https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=900&q=80', sku:'NET-EXT-01', category:'network' },
+      { id:5, title:'IoT Starter Pack', price:4500, desc:'Sensors, breadboard, cables + Raspberry Pi projects guide.', img:'https://images.unsplash.com/photo-1581094651667-6b0b9e3b6d0b?auto=format&fit=crop&w=900&q=80', sku:'IOT-START-01', category:'iot' },
+      { id:6, title:'USB Microphone', price:2200, desc:'Clear voice for online classes and recording.', img:'https://images.unsplash.com/photo-1511644516642-7f6a84b4b7c2?auto=format&fit=crop&w=900&q=80', sku:'AUD-USB-01', category:'audio' }
+    ];
+
+    // --- state / cart
+    let CART = JSON.parse(localStorage.getItem('ha_cart') || '{}');
+
+    // render list (supports search & sort)
+    function renderProducts(list = PRODUCTS){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4';
+        col.innerHTML = `
+          <div class="card product-card h-100">
+            <img src="${p.img}" alt="${escapeHtml(p.title)}">
+            <div class="card-body d-flex flex-column">
+              <div>
+                <h5 class="product-title">${escapeHtml(p.title)}</h5>
+                <p class="product-desc small">${escapeHtml(p.desc)}</p>
+              </div>
+              <div class="mt-3 d-flex justify-content-between align-items-center">
+                <div class="price">৳ ${formatPrice(p.price)}</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-dark me-2" onclick="openProductModal(${p.id})"><i class="bi bi-eye"></i></button>
+                  <button class="btn btn-sm btn-dark" onclick="addToCart(${p.id},1)"><i class="bi bi-cart-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(col);
+      });
+      updateCartCount();
+    }
+
+    // helpers
+    function formatPrice(n){ return new Intl.NumberFormat('en-BD').format(n.toFixed(2)); }
+    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // product modal
+    let currentModalProduct = null;
+    function openProductModal(id){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+      currentModalProduct = p;
+      document.getElementById('modalImage').src = p.img;
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalDesc').textContent = p.desc;
+      document.getElementById('modalPrice').textContent = '৳ ' + formatPrice(p.price);
+      document.getElementById('modalSku').textContent = p.sku;
+      document.getElementById('modalQty').value = 1;
+      const modal = new bootstrap.Modal(document.getElementById('productModal'));
+      modal.show();
+    }
+    document.getElementById('addModalCart')?.addEventListener('click', function(){
+      const qty = parseInt(document.getElementById('modalQty').value || 1, 10);
+      if(currentModalProduct) addToCart(currentModalProduct.id, qty);
+      bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+    });
+
+    // cart functions (store in localStorage)
+    function addToCart(id, qty=1){
+      CART[id] = (CART[id] || 0) + qty;
+      saveCart();
+      updateCartCount();
+      showToast('Added to cart');
+    }
+    function removeFromCart(id){
+      delete CART[id];
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+    function updateCartQty(id, qty){
+      if(qty <= 0) { removeFromCart(id); return;}
+      CART[id] = qty;
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+    function saveCart(){
+      localStorage.setItem('ha_cart', JSON.stringify(CART));
+    }
+    function clearCart(){
+      CART = {};
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+
+    // render cart offcanvas
+    function renderCartItems(){
+      const wrap = document.getElementById('cartItems');
+      wrap.innerHTML = '';
+      const ids = Object.keys(CART).map(x=>parseInt(x));
+      if(ids.length===0){
+        wrap.innerHTML = '<div class="text-center py-4 text-muted">Your cart is empty</div>';
+        document.getElementById('cartTotal').textContent = '৳0.00';
+        return;
+      }
+      let total = 0;
+      ids.forEach(id=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        const qty = CART[id];
+        const subtotal = p.price * qty;
+        total += subtotal;
+        const div = document.createElement('div');
+        div.className = 'cart-item d-flex align-items-center';
+        div.innerHTML = `
+          <img src="${p.img}" class="cart-thumb me-3" alt="${escapeHtml(p.title)}">
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between">
+              <strong>${escapeHtml(p.title)}</strong>
+              <div class="text-muted">৳ ${formatPrice(subtotal)}</div>
+            </div>
+            <div class="d-flex align-items-center gap-2 mt-2">
+              <input type="number" min="1" value="${qty}" class="form-control form-control-sm w-50 cart-qty" data-id="${id}">
+              <button class="btn btn-sm btn-outline-danger ms-2" data-id="${id}"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        `;
+        wrap.appendChild(div);
+      });
+      document.getElementById('cartTotal').textContent = '৳ ' + formatPrice(total);
+      // attach events
+      document.querySelectorAll('.cart-item .cart-qty').forEach(el=>{
+        el.addEventListener('change', e=>{
+          updateCartQty(parseInt(e.target.dataset.id), parseInt(e.target.value));
+        });
+      });
+      document.querySelectorAll('.cart-item button[data-id]').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          removeFromCart(parseInt(btn.dataset.id));
+        });
+      });
+    }
+
+    function updateCartCount(){
+      const count = Object.values(CART).reduce((s,n)=>s+n,0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    // simple toast
+    function showToast(msg){
+      const el = document.createElement('div');
+      el.className = 'toast align-items-center show position-fixed bottom-0 end-0 m-3';
+      el.style.zIndex = 9999;
+      el.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button class="btn-close btn-close-white me-2 m-auto" onclick="this.closest('.toast').remove()"></button></div>`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 2400);
+    }
+
+    // initial render
+    renderProducts(PRODUCTS);
+    renderCartItems();
+    updateCartCount();
+
+    // search
+    const searchBox = document.getElementById('searchBox');
+    searchBox && searchBox.addEventListener('input', e=>{
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = PRODUCTS.filter(p => (p.title + ' ' + p.desc).toLowerCase().includes(q));
+      renderProducts(filtered);
+    });
+
+    // sort
+    document.getElementById('sortBy').addEventListener('change', function(){
+      const val = this.value;
+      let list = [...PRODUCTS];
+      if(val === 'price-asc') list.sort((a,b)=>a.price-b.price);
+      if(val === 'price-desc') list.sort((a,b)=>b.price-a.price);
+      renderProducts(list);
+    });
+
+    // load more (demo)
+    document.getElementById('loadMore').addEventListener('click', ()=>{
+      showToast('No more products in demo');
+    });
+
+    // checkout (demo)
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+      if(Object.keys(CART).length === 0){
+        showToast('Your cart is empty');
+        return;
+      }
+      // demo: just show summary and clear
+      alert('Demo checkout — thank you. Cart will be cleared (in real site integrate payment).');
+      clearCart();
+      bootstrap.Offcanvas.getInstance(document.getElementById('cartCanvas')).hide();
+    });
+
+    document.getElementById('clearCart').addEventListener('click', ()=>{
+      clearCart();
+    });
+
+    // utility: open product by id from code (used in sample card)
+    window.openProductModal = openProductModal;
+
+  </script>
+</body>
+</html>
